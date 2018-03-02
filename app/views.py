@@ -53,6 +53,13 @@ def login():
             # remember to flash a message to the user
                 return redirect(url_for("secure_page"))  # they should be redirected to a secure-page route instead
     return render_template("login.html", form=form)
+ 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("You have been logged out")
+    return redirect(url_for("home"))
 
 @app.route('/secure-page')
 @login_required
